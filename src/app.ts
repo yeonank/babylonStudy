@@ -1,7 +1,7 @@
 import "@babylonjs/core/Debug/debugLayer";
 import "@babylonjs/inspector";
 import "@babylonjs/loaders/glTF";
-import { Engine, Scene, ArcRotateCamera, Vector3, HemisphericLight, Mesh, MeshBuilder } from "@babylonjs/core";
+import { Engine, Scene, ArcRotateCamera, Vector3, HemisphericLight, Mesh, MeshBuilder, Sound } from "@babylonjs/core";
 
 class App {
     constructor() {
@@ -23,6 +23,10 @@ class App {
             const light = new HemisphericLight("light", new Vector3(0, 1, 0));
 
             const box = MeshBuilder.CreateBox("box", {});
+            box.position.y = 0.5;
+            const ground = MeshBuilder.CreateGround("ground", {width:10, height:10});
+            const bounce = new Sound("bounce", "sounds/bounce.wav", scene);
+            setInterval(() => bounce.play(), 3000);
         }
         createScene();
 
